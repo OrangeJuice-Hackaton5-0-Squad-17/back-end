@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TestModule } from './testRoute/test.module';
+import { ProjectsModule } from './projects/projects.module';
 
 @Module({
-  imports: [TestModule],
+  imports: [TestModule, ProjectsModule],
   controllers: [],
   providers: [],
 })

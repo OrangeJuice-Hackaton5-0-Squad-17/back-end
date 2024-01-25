@@ -18,5 +18,16 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime?
   
+  projects Project[]
+
   @@index([email])
+}
+
+model Project {
+  id String @id @default(uuid())
+  title String
+  tag String
+  description String
+  userId String
+  user User @relation(fields: [userId], references: [id])
 }
