@@ -1,6 +1,6 @@
-import { UserRepository } from "./../../repositories/user-repository";
-import { User } from "../../entities/user/user";
-import { Email } from "../../entities/user/validations/user.email.validation";
+import { UserRepository } from "@app/repositories/user-repository";
+import { User } from "@app/entities/user/user";
+import { Email } from "@app/entities/user/validations/user.email.validation";
 import { Injectable } from "@nestjs/common";
 
 interface CreateUserRequest {

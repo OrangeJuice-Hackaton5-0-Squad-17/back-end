@@ -1,8 +1,5 @@
 // this is an example to custom specific validation / formating!
 
-import { IsEmail } from "./../../../../helpers/emailValidator";
-
-
 export class Email {
     private readonly email: string;
 

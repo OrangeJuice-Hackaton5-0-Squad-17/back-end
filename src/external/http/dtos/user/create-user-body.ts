@@ -1,5 +1,5 @@
 import { IsNotEmpty, Length } from "class-validator";
-import { IsEmail } from "src/helpers/emailValidator";
+import { IsEmail } from "@helpers/emailValidator";
 
 export class CreateUserBody {
     @IsNotEmpty()

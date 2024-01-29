@@ -1,4 +1,4 @@
-import { InMemoryUserRepository } from "./../../../../test/repositories/in-memory-user-repository";
+import { InMemoryUserRepository } from "@test/repositories/in-memory-user-repository";
 import { CreateUser } from "./create-user";
 
 describe('use-cases-create-user', () => {

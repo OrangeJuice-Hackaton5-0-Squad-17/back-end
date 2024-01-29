@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { TestService } from 'src/app/testRoute/testRoute.service.interface';
+import { TestService } from '@app/testRoute/testRoute.service.interface';
 
 
 @Controller()
