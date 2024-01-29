@@ -6,7 +6,7 @@ import { TestService } from 'src/app/testRoute/testRoute.service.interface';
 export class TestController {
   constructor(private readonly testService: TestService) {}
 
-  @Get()
+  @Get('test')
   getTestMessage(): string {
     return this.testService.testMessage();
   }

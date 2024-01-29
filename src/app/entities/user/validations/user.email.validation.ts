@@ -1,5 +1,8 @@
 // this is an example to custom specific validation / formating!
 
+import { IsEmail } from "./../../../../helpers/emailValidator";
+
+
 export class Email {
     private readonly email: string;
 
@@ -17,6 +20,12 @@ export class Email {
         if (!isEmailLenghtValid) {
             throw new Error('The email length must be greater than 6 and less than 240 characters.');
         }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValidEmail = typeof email === 'string' && emailRegex.test(email);
+        if (!isValidEmail) {
+            throw new Error('The email must be a valid email address.');
+        }
+        
         this.email = email;
     }
 }
