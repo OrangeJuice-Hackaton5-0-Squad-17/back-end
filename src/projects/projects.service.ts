@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { CreateProjectDto } from './dto/create-project.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
 
 @Injectable()
 export class ProjectsService {
@@ -34,4 +35,42 @@ export class ProjectsService {
     return project;
   }
 
+  async update(projectId: string, updateProjectDto: UpdateProjectDto) {
+    const updatedProject = await this.prisma.project.update({
+      where: {id: projectId},
+      data: {
+        title: updateProjectDto.title,
+        link: updateProjectDto.link,
+        description: updateProjectDto.description,
+      }
+    })
+    if (updateProjectDto.tags) {
+      //Remover todas as associações de tags existentes
+      await this.prisma.projectTag.deleteMany({
+        where: { projectId: projectId },
+      });
+
+      //Associar novas tags
+      for (const tagName of updateProjectDto.tags) {
+        let tag = await this.prisma.tag.findUnique({
+          where: { name: tagName },
+        });
+
+        if (!tag) {
+          tag = await this.prisma.tag.create({
+            data: { name: tagName },
+          });
+        }
+
+        await this.prisma.projectTag.create({
+          data: {
+            projectId: projectId,
+            tagId: tag.id,
+          },
+        });
+      
+      }
+  }
+    return updatedProject;
+ }
 }

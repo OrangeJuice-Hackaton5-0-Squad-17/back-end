@@ -31,8 +31,8 @@ model Project {
   userId String
   user User @relation(fields: [userId], references: [id])
   projectTags ProjectTag[]
-
-  @@unique([userId])
+  created_at DateTime @default(now())
+  updated_at DateTime?
 }
 
 model Tag {
