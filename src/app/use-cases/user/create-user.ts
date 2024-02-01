@@ -4,7 +4,7 @@ import { Email } from "@app/entities/user/validations/user.email.validation";
 import { Injectable } from "@nestjs/common";
 import { UserEmailAlreadyInUse } from "../errors/user-email-already-in-use-error";
 
-interface CreateUserRequest {
+export interface CreateUserRequest {
     name: string;
     email: string;
     password: string;

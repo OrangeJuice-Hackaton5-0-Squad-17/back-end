@@ -2,7 +2,7 @@ import { Replace } from "src/helpers/Replace";
 import { Email } from "./validations/user.email.validation";
 import { randomUUID } from "crypto";
 
-interface UserProps {
+export interface UserProps {
     name: string;
     email: Email;
     password: string;
