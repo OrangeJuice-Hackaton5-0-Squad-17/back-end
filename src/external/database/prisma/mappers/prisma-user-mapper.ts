@@ -17,7 +17,8 @@ export class PrismaUserMapper {
             email: new Email(raw.email),
             name: raw.name,
             password: raw.password,
-            created_at: raw.created_at
+            created_at: raw.created_at,
+            updated_at: raw.updated_at
         }, raw.id);
     }
 }
