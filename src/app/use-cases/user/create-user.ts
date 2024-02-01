@@ -24,18 +24,18 @@ export class CreateUser {
 
         if (userFound) {
             throw new UserEmailAlreadyInUse();
-        }
-
-        const user = new User({
-            name,
-            email: new Email(email),
-            password
-        });
-
-        await this.userRepository.create(user);
-
-        return {
-            user,
-        }
+        } else {
+            const user = new User({
+                name,
+                email: new Email(email),
+                password
+            });
+    
+            await this.userRepository.create(user);
+    
+            return {
+                user,
+            }
+        }       
     }
 }

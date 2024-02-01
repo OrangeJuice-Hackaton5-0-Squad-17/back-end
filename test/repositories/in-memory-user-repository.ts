@@ -3,8 +3,12 @@ import { UserRepository } from "src/app/repositories/user-repository";
 
 export class InMemoryUserRepository implements UserRepository {
     public users: User[] = [];
-    findByEmail(email: string): Promise<User> {
-        throw new Error("Method not implemented.");
+    async findByEmail(email: string): Promise<User | null> {
+        const foundUser = this.users.find((item) => item.email.value === email);
+        if (!foundUser) {
+            return null
+        }
+        return foundUser
     }
 
     async create(user: User) {
