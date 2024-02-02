@@ -1,8 +1,14 @@
 import { User } from "src/app/entities/user/user";
 import { UserRepository } from "src/app/repositories/user-repository";
-
 export class InMemoryUserRepository implements UserRepository {
     public users: User[] = [];
+    async findById(id: string): Promise<User | null> {
+        const foundUser = this.users.find((item) => item.id === id);
+        if (!foundUser) {
+            return null
+        }
+        return foundUser
+    }
     async update(user: User): Promise<void> {
         const userIndex = this.users.findIndex( item => item.id === user.id);
         if (userIndex >= 0) {
@@ -16,9 +22,7 @@ export class InMemoryUserRepository implements UserRepository {
         }
         return foundUser
     }
-
     async create(user: User) {
        this.users.push(user);
-       console.log('criando usuario...', this.users);
     }
 }
