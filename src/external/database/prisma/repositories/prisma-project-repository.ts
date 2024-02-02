@@ -36,4 +36,6 @@ export class PrismaProjectRepository implements ProjectRepository {
     }
     return;
   }
+
+  async update(project: Project): Promise<void> {}
 }

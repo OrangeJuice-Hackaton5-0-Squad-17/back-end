@@ -8,7 +8,7 @@ export interface UpsertTagOptions {
 
 export abstract class TagRepository {
   abstract upsert(option: UpsertTagOptions): Promise<Tag>;
-  abstract findUnique(projectId: string): Promise<Tag>;
+  abstract findUnique(name: string): Promise<Tag>;
   abstract findById(id: string): Promise<Tag | null>;
   abstract create(name: string): Promise<Tag>;
 }
