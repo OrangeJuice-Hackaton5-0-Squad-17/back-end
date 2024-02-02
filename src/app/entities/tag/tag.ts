@@ -1,6 +1,6 @@
 import { Replace } from 'src/helpers/Replace';
 import { randomUUID } from 'crypto';
-import { ProjectTag } from '../projectTag/ProjectTag';
+import { ProjectTag } from '../projectTag/projectTag';
 
 interface TagProps {
   name: string;
@@ -32,7 +32,7 @@ export class Tag {
   public get name(): string {
     return this.props.name;
   }
-  
+
   public get projectTags(): ProjectTag[] {
     return this.props.projectTags;
   }

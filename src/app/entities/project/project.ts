@@ -1,11 +1,12 @@
 import { User } from 'src/app/entities/user/user';
 import { randomUUID } from 'crypto';
-import { ProjectTag } from '../projectTag/ProjectTag';
+import { ProjectTag } from '../projectTag/projectTag';
 import { Replace } from 'src/helpers/Replace';
 
 interface ProjectProps {
   title: string;
   link: string;
+  tags: string[];
   description: string;
   userId: string;
   user: User;
@@ -43,6 +44,14 @@ export class Project {
 
   public set link(link: string) {
     this.props.link = link;
+  }
+
+  public get tags(): string[] {
+    return this.props.tags;
+  }
+
+  public set tags(tags: string[]) {
+    this.props.tags = tags;
   }
 
   public get description(): string {
