@@ -6,10 +6,11 @@ import { UserEmailAlreadyInUse } from '@app/use-cases/errors/user-email-already-
 import { UpdateUserBody } from '@external/http/dtos/user/update-user-body';
 import { UpdateUser } from '@app/use-cases/user/update-user';
 import { UserNotFound } from '@app/use-cases/errors/user-not-found-error';
+import { GetUserById } from '@app/use-cases/user/get-user-by-id';
 
 @Controller('user')
 export class UserController {
-  constructor(private createUser: CreateUser, private updateUser: UpdateUser) {}
+  constructor(private createUser: CreateUser, private updateUser: UpdateUser, private getUserById: GetUserById) {}
   @Post()
   async create(@Body() body: CreateUserBody) {
     const { name, email, password } = body;
@@ -51,5 +52,19 @@ export class UserController {
         throw error;
       }
     }
-  }
+  };
+
+  @Get(':id')
+  async get(@Param('id') id: string) {
+    try {
+    const { user } =  await this.getUserById.execute({ id });
+    return { user: UserViewModel.toHTTP(user) }
+    } catch (error) {
+      if (error instanceof UserNotFound) {
+        throw new HttpException('User not found.', HttpStatus.BAD_REQUEST);
+      } else {
+        throw error;
+      }
+    }
+  };
 }

@@ -6,6 +6,7 @@ import { TestRoute } from '@app/testRoute/testRoute.service';
 import { CreateUser } from '@app/use-cases/user/create-user';
 import { UpdateUser } from '@app/use-cases/user/update-user';
 import { DatabaseModule } from '@external/database/database.module';
+import { GetUserById } from '@app/use-cases/user/get-user-by-id';
 
 @Module({
   imports: [DatabaseModule],
@@ -16,7 +17,8 @@ import { DatabaseModule } from '@external/database/database.module';
       useClass: TestRoute,
     },
     CreateUser,
-    UpdateUser
+    UpdateUser,
+    GetUserById
   ]
   
 })
