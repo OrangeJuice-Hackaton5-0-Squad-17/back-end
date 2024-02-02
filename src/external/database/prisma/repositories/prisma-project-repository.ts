@@ -1,6 +1,6 @@
 import { Project } from "src/app/entities/project/project";
 import { ProjectRepository } from "src/app/repositories/project/project-repository";
-import { PrismaService } from "src/prisma.service";
+import { PrismaService } from "src/external/database/prisma/prisma.service";
 import { TagRepository } from "src/app/repositories/tag/tag-repository";
 import { Tag } from "src/app/entities/tag/tag";
 import { ProjectTagRepository } from "src/app/repositories/projectTag/projectTag-repository";
