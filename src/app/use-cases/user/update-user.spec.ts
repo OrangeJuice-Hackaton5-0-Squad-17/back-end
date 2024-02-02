@@ -11,6 +11,7 @@ describe('use-cases-update-user', () => {
     let userRepository: InMemoryUserRepository;
     let user: User;
     let lastTestRun: boolean;
+    const realTestUserAtDbID = '33cf9780-3ff4-46a1-a599-addf1d9e577b'
 
     beforeAll(async () => {
         userRepository = new InMemoryUserRepository();
@@ -99,11 +100,11 @@ describe('use-cases-update-user', () => {
           await app.init();
       
           const response = await request(app.getHttpServer())
-            .patch(`/user/${user.id}`)
-            .send({ "name":"vovolunder" });
+            .patch(`/user/${realTestUserAtDbID}`)
+            .send({});
       
           expect(response.status).toBe(HttpStatus.BAD_REQUEST);
-          expect(response.body.message).toContain('At least one of the fields (name, email, or password) must be provided.');
+          expect(response.body.message).toContain('At least one of the fields (email, name, or password) must be provided.');
           
     });
 });
