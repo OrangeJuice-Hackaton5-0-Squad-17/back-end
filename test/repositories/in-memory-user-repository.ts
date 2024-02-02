@@ -1,5 +1,5 @@
 import { User } from "src/app/entities/user/user";
-import { UserRepository } from "src/app/repositories/user-repository";
+import { UserRepository } from "@app/repositories/user/user-repository";
 export class InMemoryUserRepository implements UserRepository {
     public users: User[] = [];
     async delete(id: string): Promise<void> {

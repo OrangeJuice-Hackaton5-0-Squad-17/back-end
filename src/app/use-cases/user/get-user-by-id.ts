@@ -1,5 +1,5 @@
 import { User } from "@app/entities/user/user";
-import { UserRepository } from "@app/repositories/user-repository";
+import { UserRepository } from "@app/repositories/user/user-repository";
 import { Injectable } from "@nestjs/common";
 import { UserNotFound } from "../errors/user-not-found-error";
 

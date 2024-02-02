@@ -1,4 +1,4 @@
-import { UserRepository } from "@app/repositories/user-repository";
+import { UserRepository } from "@app/repositories/user/user-repository";
 import { User } from "@app/entities/user/user";
 import { Email } from "@app/entities/user/validations/user.email.validation";
 import { Injectable } from "@nestjs/common";
