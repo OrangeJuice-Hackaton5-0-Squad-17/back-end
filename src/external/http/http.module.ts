@@ -7,6 +7,7 @@ import { CreateUser } from '@app/use-cases/user/create-user';
 import { UpdateUser } from '@app/use-cases/user/update-user';
 import { DatabaseModule } from '@external/database/database.module';
 import { GetUserById } from '@app/use-cases/user/get-user-by-id';
+import { DeleteUserById } from '@app/use-cases/user/delete-user';
 
 @Module({
   imports: [DatabaseModule],
@@ -18,7 +19,8 @@ import { GetUserById } from '@app/use-cases/user/get-user-by-id';
     },
     CreateUser,
     UpdateUser,
-    GetUserById
+    GetUserById,
+    DeleteUserById
   ]
   
 })

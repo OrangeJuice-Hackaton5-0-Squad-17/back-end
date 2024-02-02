@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post } from '@nestjs/common';
 import { CreateUserBody } from '@external/http/dtos/user/create-user-body';
 import { CreateUser } from '@app/use-cases/user/create-user';
 import { UserViewModel } from '@external/http/view-models/user-view-model';
@@ -7,10 +7,12 @@ import { UpdateUserBody } from '@external/http/dtos/user/update-user-body';
 import { UpdateUser } from '@app/use-cases/user/update-user';
 import { UserNotFound } from '@app/use-cases/errors/user-not-found-error';
 import { GetUserById } from '@app/use-cases/user/get-user-by-id';
+import { DeleteUserById } from '@app/use-cases/user/delete-user';
+import { UserAlreadyDeleted } from '@app/use-cases/errors/user-already-deleted-error';
 
 @Controller('user')
 export class UserController {
-  constructor(private createUser: CreateUser, private updateUser: UpdateUser, private getUserById: GetUserById) {}
+  constructor(private createUser: CreateUser, private updateUser: UpdateUser, private getUserById: GetUserById, private deleteUserById: DeleteUserById) {}
   @Post()
   async create(@Body() body: CreateUserBody) {
     const { name, email, password } = body;
@@ -67,4 +69,18 @@ export class UserController {
       }
     }
   };
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    try {
+      await this.deleteUserById.execute({ id });
+    } catch (error) {
+      if (error instanceof UserNotFound) {
+        throw new HttpException('User not found.', HttpStatus.BAD_REQUEST);
+      } else if (error instanceof UserAlreadyDeleted) {
+        throw new HttpException('This user has already been deleted.', HttpStatus.BAD_REQUEST);
+      } else {
+        throw error;
+      }
+    }
+  }
 }

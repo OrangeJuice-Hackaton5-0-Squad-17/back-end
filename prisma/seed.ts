@@ -7,7 +7,8 @@ const userSeed = [
         email: 'test@test.com',
         password: '123456789',
         created_at: '2024-01-29T20:04:30.809Z',
-        updated_at: null
+        updated_at: null,
+        deleted_at: null
     }
 ];
 

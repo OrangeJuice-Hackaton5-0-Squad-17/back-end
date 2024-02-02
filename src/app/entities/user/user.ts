@@ -7,7 +7,8 @@ export interface UserProps {
     email: Email;
     password: string;
     created_at: Date;
-    updated_at?: Date | null; 
+    updated_at?: Date | null;
+    deleted_at?: Date | null;
   }
 
 export class User {
@@ -53,12 +54,16 @@ export class User {
     public get created_at(): Date{
         return this.props.created_at;
       }
-
-      public set updated_at(updated_at: Date | null | undefined){
-        this.props.updated_at = updated_at;
-    }
     
     public get updated_at(): Date | null | undefined{
       return this.props.updated_at;
+    }
+
+    public get deleted_at(): Date | null | undefined{
+      return this.props.deleted_at;
+    }
+
+    public set deleted_at(date: Date){
+       this.props.deleted_at = date;
     }
 }

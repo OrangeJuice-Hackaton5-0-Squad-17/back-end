@@ -2,6 +2,12 @@ import { User } from "src/app/entities/user/user";
 import { UserRepository } from "src/app/repositories/user-repository";
 export class InMemoryUserRepository implements UserRepository {
     public users: User[] = [];
+    async delete(id: string): Promise<void> {
+        const userIndex = this.users.findIndex( item => item.id === id);
+        if (userIndex >= 0) {
+             this.users[userIndex].deleted_at = new Date();
+        }
+    }
     async findById(id: string): Promise<User | null> {
         const foundUser = this.users.find((item) => item.id === id);
         if (!foundUser) {
