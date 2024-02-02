@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post } from '@nestjs/common';
 import { CreateUserBody } from '@external/http/dtos/user/create-user-body';
 import { CreateUser } from '@app/use-cases/user/create-user';
-import { UserViewModel } from '@external/http/view-models/user-view-model';
+import { UserViewModel } from '@external/http/view-models/user/user-view-model';
 import { UserEmailAlreadyInUse } from '@app/use-cases/errors/user-email-already-in-use-error';
 import { UpdateUserBody } from '@external/http/dtos/user/update-user-body';
 import { UpdateUser } from '@app/use-cases/user/update-user';
