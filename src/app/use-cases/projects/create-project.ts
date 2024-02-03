@@ -6,7 +6,7 @@ import { Tag } from 'src/app/entities/tag/tag';
 import { ProjectTagRepository } from 'src/app/repositories/projectTag/projectTag-repository';
 import { UpsertTagOptions } from 'src/app/repositories/tag/tag-repository';
 
-interface CreateProjectRequest {
+export interface CreateProjectRequest {
   title: string;
   link: string;
   tags: string[];

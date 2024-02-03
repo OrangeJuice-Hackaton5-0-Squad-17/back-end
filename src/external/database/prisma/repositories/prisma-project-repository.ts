@@ -37,5 +37,10 @@ export class PrismaProjectRepository implements ProjectRepository {
     return;
   }
 
-  async update(project: Project): Promise<void> {}
+  async update(project: Project): Promise<void> {
+    
+  }
+  async findById(id: string): Promise<Project | null> {
+    return null;
+  }
 }

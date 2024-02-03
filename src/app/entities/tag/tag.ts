@@ -2,7 +2,7 @@ import { Replace } from 'src/helpers/Replace';
 import { randomUUID } from 'crypto';
 import { ProjectTag } from '../projectTag/projectTag';
 
-interface TagProps {
+export interface TagProps {
   name: string;
   projectTags: ProjectTag[];
   created_at: Date;

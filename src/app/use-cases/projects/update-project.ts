@@ -4,7 +4,7 @@ import { Project } from "src/app/entities/project/project";
 import { TagRepository } from "src/app/repositories/tag/tag-repository";
 import { ProjectTagRepository } from "src/app/repositories/projectTag/projectTag-repository";
 
-interface UpdateProjectRequest {
+export interface UpdateProjectRequest {
     id: string;
     title: string;
     link: string;
