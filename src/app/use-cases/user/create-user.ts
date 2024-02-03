@@ -3,6 +3,7 @@ import { User } from "@app/entities/user/user";
 import { Email } from "@app/entities/user/validations/user.email.validation";
 import { Injectable } from "@nestjs/common";
 import { UserEmailAlreadyInUse } from "../errors/user-email-already-in-use-error";
+import * as bcrypt from 'bcrypt';
 
 export interface CreateUserRequest {
     name: string;
@@ -28,7 +29,7 @@ export class CreateUser {
             const user = new User({
                 name,
                 email: new Email(email),
-                password
+                password: await bcrypt.hash(password, 11)
             });
     
             await this.userRepository.create(user);

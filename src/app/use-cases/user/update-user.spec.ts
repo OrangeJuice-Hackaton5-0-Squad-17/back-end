@@ -11,7 +11,7 @@ describe('use-cases-update-user', () => {
     let userRepository: InMemoryUserRepository;
     let user: User;
     let lastTestRun: boolean;
-    const realTestUserAtDbID = '33cf9780-3ff4-46a1-a599-addf1d9e577b'
+    const realTestUserAtDbID = 'a3ct9f81-gfa4-41a1-b392-1dhg1d9ea2fd'
 
     beforeAll(async () => {
         userRepository = new InMemoryUserRepository();
