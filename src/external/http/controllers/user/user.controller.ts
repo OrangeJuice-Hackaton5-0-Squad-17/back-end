@@ -9,15 +9,16 @@ import { UserNotFound } from '@app/use-cases/errors/user-not-found-error';
 import { GetUserById } from '@app/use-cases/user/get-user-by-id';
 import { DeleteUserById } from '@app/use-cases/user/delete-user';
 import { UserAlreadyDeleted } from '@app/use-cases/errors/user-already-deleted-error';
+import { UserService } from '@app/use-cases/user/user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private createUser: CreateUser, private updateUser: UpdateUser, private getUserById: GetUserById, private deleteUserById: DeleteUserById) {}
+  constructor(private userService: UserService) {}
   @Post()
   async create(@Body() body: CreateUserBody) {
     const { name, email, password } = body;
     try {
-      const { user } = await this.createUser.execute({
+      const { user } = await this.userService.create({
         name,
         email,
         password
@@ -40,7 +41,7 @@ export class UserController {
     }
     try {
       const { name, email, password } = body;
-      await this.updateUser.execute({
+      await this.userService.update({
         id,
         name,
         email,
@@ -59,7 +60,7 @@ export class UserController {
   @Get(':id')
   async get(@Param('id') id: string) {
     try {
-    const { user } =  await this.getUserById.execute({ id });
+    const { user } =  await this.userService.getById({ id });
     return { user: UserViewModel.toHTTP(user) }
     } catch (error) {
       if (error instanceof UserNotFound) {
@@ -72,7 +73,7 @@ export class UserController {
   @Delete(':id')
   async delete(@Param('id') id: string) {
     try {
-      await this.deleteUserById.execute({ id });
+      await this.userService.deleteById({ id });
     } catch (error) {
       if (error instanceof UserNotFound) {
         throw new HttpException('User not found.', HttpStatus.BAD_REQUEST);

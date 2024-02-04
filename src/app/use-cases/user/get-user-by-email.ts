@@ -7,7 +7,7 @@ export interface GetUserByEmailRequest {
     email: string;
 };
 
-interface GetUserByEmailResponse {
+export interface GetUserByEmailResponse {
     user: User;
 }
 @Injectable()

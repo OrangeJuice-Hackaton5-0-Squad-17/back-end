@@ -11,7 +11,7 @@ export interface CreateUserRequest {
     password: string;
 }
 
-interface CreateUserResponse {
+export interface CreateUserResponse {
     user: User;
 }
 

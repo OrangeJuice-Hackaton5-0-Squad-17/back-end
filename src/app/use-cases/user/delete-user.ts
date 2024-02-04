@@ -8,9 +8,6 @@ export interface DeleteUserRequest {
     id: string;
 }
 
-export interface DeleteUserResponse {
-    user: User
-}
 @Injectable()
 export class DeleteUserById {
     constructor(private userRepository: UserRepository) {}

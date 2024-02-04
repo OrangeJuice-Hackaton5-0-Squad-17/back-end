@@ -5,6 +5,7 @@ import { GetUserById } from '@app/use-cases/user/get-user-by-id';
 import { DeleteUserById } from '@app/use-cases/user/delete-user';
 import { GetUserByEmail } from './get-user-by-email';
 import { DatabaseModule } from '@external/database/database.module';
+import { UserService } from './user.service';
 
 @Module({
   imports: [DatabaseModule],
@@ -14,14 +15,16 @@ import { DatabaseModule } from '@external/database/database.module';
     UpdateUser,
     GetUserById,
     DeleteUserById,
-    GetUserByEmail
+    GetUserByEmail,
+    UserService
   ],
   exports: [
     CreateUser,
     UpdateUser,
     GetUserById,
     DeleteUserById,
-    GetUserByEmail
+    GetUserByEmail,
+    UserService
   ]
   
 })

@@ -7,7 +7,7 @@ export interface GetUserByIdRequest {
     id: string;
 };
 
-interface GetUserByIdResponse {
+export interface GetUserByIdResponse {
     user: User;
 }
 @Injectable()
