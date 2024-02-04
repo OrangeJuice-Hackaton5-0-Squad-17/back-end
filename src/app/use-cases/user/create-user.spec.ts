@@ -26,7 +26,6 @@ describe('use-cases-create-user', () => {
         });
 
         const isHash = bcrypt.compareSync(password, user.password);
-        console.log(user.password)
         expect(isHash).toBe(true);
     });
 });

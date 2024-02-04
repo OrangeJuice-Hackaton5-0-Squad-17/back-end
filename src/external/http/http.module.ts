@@ -3,24 +3,19 @@ import { TestController } from './controllers/testRoute/test.controller';
 import { UserController } from './controllers/user/user.controller';
 import { TestService } from '@app/testRoute/testRoute.service.interface';
 import { TestRoute } from '@app/testRoute/testRoute.service';
-import { CreateUser } from '@app/use-cases/user/create-user';
-import { UpdateUser } from '@app/use-cases/user/update-user';
 import { DatabaseModule } from '@external/database/database.module';
-import { GetUserById } from '@app/use-cases/user/get-user-by-id';
-import { DeleteUserById } from '@app/use-cases/user/delete-user';
+import { AuthController } from './controllers/auth/auth.controller';
+import { AuthModule } from '@app/auth/auth.module';
+import { UserModule } from '@app/use-cases/user/user.module';
 
 @Module({
-  imports: [DatabaseModule],
-  controllers: [TestController, UserController],
+  imports: [DatabaseModule, AuthModule, UserModule],
+  controllers: [TestController, UserController, AuthController],
   providers: [
     {
       provide: TestService,
       useClass: TestRoute,
     },
-    CreateUser,
-    UpdateUser,
-    GetUserById,
-    DeleteUserById
   ]
   
 })
