@@ -10,7 +10,7 @@ export class UserService {
     constructor(
         private createUser: CreateUser,
         private deleteUserById: DeleteUserById,
-        public getUserByEmail: GetUserByEmail,
+        private getUserByEmail: GetUserByEmail,
         private getUserById: GetUserById,
         private updateUser: UpdateUser
     ) {}
