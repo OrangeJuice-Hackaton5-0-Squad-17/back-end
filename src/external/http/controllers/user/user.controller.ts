@@ -7,7 +7,8 @@ import { UserNotFound } from '@app/use-cases/errors/user-not-found-error';
 import { UserAlreadyDeleted } from '@app/use-cases/errors/user-already-deleted-error';
 import { UserService } from '@app/use-cases/user/user.service';
 import { IsPublic } from '@app/auth/decorators/is-public.decorator';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}

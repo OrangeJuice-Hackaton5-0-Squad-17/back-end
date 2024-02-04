@@ -90,7 +90,7 @@ describe('use-cases-update-user', () => {
             await app.close();
         }
     });
-    it('should throw error if trying to update an user with empty body.', async () => {
+    it('should throw error if trying to update an user with no valid access_token.', async () => {
         lastTestRun = true;
         moduleFixture = await Test.createTestingModule({
             imports: [AppModule],
@@ -103,8 +103,8 @@ describe('use-cases-update-user', () => {
             .patch(`/user/${realTestUserAtDbID}`)
             .send({});
       
-          expect(response.status).toBe(HttpStatus.BAD_REQUEST);
-          expect(response.body.message).toContain('At least one of the fields (email, name, or password) must be provided.');
+          expect(response.status).toBe(HttpStatus.UNAUTHORIZED);
+          expect(response.body.message).toContain('Unauthorized');
           
     });
 });

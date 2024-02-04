@@ -4,11 +4,12 @@ import { AuthService } from "../../../../app/auth/auth.service";
 import { User } from "@app/entities/user/user";
 import { Request as ExpressRequest } from "express";
 import { IsPublic } from "@app/auth/decorators/is-public.decorator";
+import { ApiTags } from "@nestjs/swagger";
 
 interface AuthRequest extends ExpressRequest {
     user: User
 }
-
+@ApiTags('auth')
 @Controller()
 export class AuthController {
     constructor(private readonly authservice: AuthService) { }
