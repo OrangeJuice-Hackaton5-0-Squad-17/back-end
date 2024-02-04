@@ -6,10 +6,12 @@ import { UpdateUserBody } from '@external/http/dtos/user/update-user-body';
 import { UserNotFound } from '@app/use-cases/errors/user-not-found-error';
 import { UserAlreadyDeleted } from '@app/use-cases/errors/user-already-deleted-error';
 import { UserService } from '@app/use-cases/user/user.service';
+import { IsPublic } from '@app/auth/decorators/is-public.decorator';
 
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
+  @IsPublic()
   @Post()
   async create(@Body() body: CreateUserBody) {
     const { name, email, password } = body;
