@@ -1,19 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { ProjectRepository } from 'src/app/repositories/project/project-repository';
-import { Project } from 'src/app/entities/project/project';
-import { TagRepository } from 'src/app/repositories/tag/tag-repository';
-import { Tag } from 'src/app/entities/tag/tag';
-import { ProjectTagRepository } from 'src/app/repositories/projectTag/projectTag-repository';
-import { UpsertTagOptions } from 'src/app/repositories/tag/tag-repository';
+import { Project } from "@app/entities/project/Project";
+import { ProjectRepository } from "@app/repositories/project/project-repository";
+import { ProjectTagRepository } from "@app/repositories/projectTag/projectTag-repository";
+import { TagRepository, UpsertTagOptions } from "@app/repositories/tag/tag-repository";
+import { Injectable } from "@nestjs/common";
+
 
 export interface CreateProjectRequest {
   title: string;
-  link: string;
+  link?: string;
   tags: string[];
   description: string;
   userId: string;
+  img?: string;
 }
-interface CreateProjectResponse {
+export interface CreateProjectResponse {
   project: Project;
 }
 
@@ -26,7 +26,7 @@ export class CreateProject {
   ) {}
 
   async execute(request: CreateProjectRequest): Promise<CreateProjectResponse> {
-    const { title, link, description, userId, tags } = request;
+    const { title, link, description, userId, tags, img } = request;
 
     const project = new Project({
       title,
@@ -38,6 +38,7 @@ export class CreateProject {
       projectTags: [],
       created_at: new Date(),
       updated_at: null,
+      img
     });
 
     await this.projectRepository.create(project);

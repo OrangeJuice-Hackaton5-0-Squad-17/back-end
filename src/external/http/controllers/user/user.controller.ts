@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post, Request } from '@nestjs/common';
 import { CreateUserBody } from '@external/http/dtos/user/create-user-body';
 import { UserViewModel } from '@external/http/view-models/user/user-view-model';
 import { UserEmailAlreadyInUse } from '@app/use-cases/errors/user-email-already-in-use-error';
@@ -8,6 +8,11 @@ import { UserAlreadyDeleted } from '@app/use-cases/errors/user-already-deleted-e
 import { UserService } from '@app/use-cases/user/user.service';
 import { IsPublic } from '@app/auth/decorators/is-public.decorator';
 import { ApiTags } from '@nestjs/swagger';
+import { User } from '@app/entities/user/user';
+
+interface GetUserByIdWithTokenRequest {
+  user: User
+}
 @ApiTags('user')
 @Controller('user')
 export class UserController {
@@ -56,8 +61,9 @@ export class UserController {
     }
   };
 
-  @Get(':id')
-  async get(@Param('id') id: string) {
+  @Get('')
+  async get(@Request() req: GetUserByIdWithTokenRequest) {
+    const id = req.user.id;
     try {
     const { user } =  await this.userService.getById({ id });
     return { user: UserViewModel.toHTTP(user) }

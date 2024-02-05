@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { TestController } from './test.controller';
 import { TestService } from './testRoute.service.interface';
 import { TestRoute } from './testRoute.service';
+import { TestController } from '@external/http/controllers/testRoute/test.controller';
 
 @Module({
 

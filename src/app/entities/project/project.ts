@@ -5,11 +5,12 @@ import { Replace } from 'src/helpers/Replace';
 
 interface ProjectProps {
   title: string;
-  link: string;
+  link?: string;
   tags: string[];
   description: string;
   userId: string;
   user: User;
+  img?: string;
   projectTags: ProjectTag[];
   created_at: Date;
   updated_at?: Date | null;
@@ -76,6 +77,14 @@ export class Project {
 
   public set user(user: User) {
     this.props.user = user;
+  }
+
+  public get img(): string {
+    return this.props.img;
+  }
+
+  public set img(img: string) {
+    this.props.img = img;
   }
 
   public get projectTags(): ProjectTag[] {

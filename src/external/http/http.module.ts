@@ -7,10 +7,12 @@ import { DatabaseModule } from '@external/database/database.module';
 import { AuthController } from './controllers/auth/auth.controller';
 import { AuthModule } from '@app/auth/auth.module';
 import { UserModule } from '@app/use-cases/user/user.module';
+import { ProjectModule } from '@app/use-cases/projects/project.module';
+import { ProjectController } from './controllers/project/project.controller';
 
 @Module({
-  imports: [DatabaseModule, AuthModule, UserModule],
-  controllers: [TestController, UserController, AuthController],
+  imports: [DatabaseModule, AuthModule, UserModule, ProjectModule],
+  controllers: [TestController, UserController, AuthController, ProjectController],
   providers: [
     {
       provide: TestService,

@@ -5,7 +5,7 @@ import { Project } from "src/app/entities/project/project";
 export interface ReadProjectsRequest {
   id: string;
 }
-interface ReadProjectsResponse {
+export interface ReadProjectsResponse {
   projects: Project;
 }
 

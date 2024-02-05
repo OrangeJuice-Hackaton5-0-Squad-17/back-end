@@ -4,8 +4,8 @@ import { Tag } from '../tag/Tag';
 interface ProjectTagProps {
   projectId: string;
   tagId: string;
-  project: Project;
-  tag: Tag;
+  project?: Project;
+  tag?: Tag;
 }
 
 export class ProjectTag {

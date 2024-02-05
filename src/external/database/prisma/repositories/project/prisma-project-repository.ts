@@ -1,18 +1,17 @@
-import { Project } from "src/app/entities/project/project";
-import { ProjectRepository } from "src/app/repositories/project/project-repository";
-import { PrismaService } from "src/external/database/prisma/prisma.service";
-import { TagRepository } from "src/app/repositories/tag/tag-repository";
-import { Tag } from "src/app/entities/tag/tag";
-import { ProjectTagRepository } from "src/app/repositories/projectTag/projectTag-repository";
+import { ProjectRepository } from "@app/repositories/project/project-repository";
 import { Injectable } from "@nestjs/common";
+import { PrismaService } from "../../prisma.service";
+import { Project } from "@app/entities/project/project";
+
 
 @Injectable()
 export class PrismaProjectRepository implements ProjectRepository {
   constructor(
     private prisma: PrismaService,
-    private tagRepository: TagRepository,
-    private projectTagRepository: ProjectTagRepository,
   ) {}
+  delete(id: string): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 
   async create(project: Project): Promise<void> {
     const projectData = await this.prisma.project.create({
@@ -26,12 +25,17 @@ export class PrismaProjectRepository implements ProjectRepository {
 
     if (project.tags) {
       for (const tagName of project.tags) {
-        const tag = await this.tagRepository.upsert({
+        const tag = await this.prisma.tag.upsert({
           where: { name: tagName },
           update: {},
           create: { name: tagName }
         });
-        await this.projectTagRepository.create(projectData.id, tag.id);
+        const newProjectTag = { 
+          projectId: projectData.id,
+          tagId: tag.id,
+
+         }
+        await this.prisma.projectTag.create({ data: newProjectTag });
       }
     }
     return;

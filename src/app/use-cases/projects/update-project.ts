@@ -12,9 +12,6 @@ export interface UpdateProjectRequest {
     description: string;
     userId: string;
 }
-interface UpdateProjectResponse {
-    project: Project;
-}
 
 @Injectable()
 export class UpdateProject {
