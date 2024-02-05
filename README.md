@@ -68,7 +68,7 @@ $ npm run test:cov
 
 ```bash
 # swagger
-http://localhost:333/api
+http://localhost:3333/api
 ```
 
 ## Routes:
@@ -76,14 +76,14 @@ http://localhost:333/api
 ## TestRoute
 
 ```bash
-# GET http://localhost:333/test (to check if backend is up and running!)
+# GET http://localhost:3333/test (to check if backend is up and running!)
 no body required
 ```
 
 ## User
 
 ```bash
-# POST http://localhost:333/user (to create user)
+# POST http://localhost:3333/user (to create user)
 body:{
   "name": "Marcos Mantovani", STRING;
   "email": "teste@teste.com", STRING;
@@ -92,7 +92,7 @@ body:{
 ```
 
 ```bash
-# PATCH http://localhost:333/user/:id (to update user info) access_token required
+# PATCH http://localhost:3333/user/:id (to update user info) access_token required
 # header: Authorization: Bearer "access_token"
 body:{
   "name": "New Name", STRING
@@ -102,13 +102,13 @@ body:{
 ```
 
 ```bash
-# GET http://localhost:333/user/:id (to get user account information) access_token required
+# GET http://localhost:3333/user/:id (to get user account information) access_token required
 # header: Authorization: Bearer "access_token"
 no body required
 ```
 
 ```bash
-# DELETE http://localhost:333/user/:id (to delete user account) access_token required
+# DELETE http://localhost:3333/user/:id (to delete user account) access_token required
 # header: Authorization: Bearer "access_token"
 no body required
 ```
@@ -116,7 +116,7 @@ no body required
 ## Autentication
 
 ```bash
-# POST http://localhost:333/login (to validate email/password and get access_token)
+# POST http://localhost:3333/login (to validate email/password and get access_token)
 body:{
   "email": "teste@teste.com", STRING;
   "password": "pass@sword123*" STRING;
