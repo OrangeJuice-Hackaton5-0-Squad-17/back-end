@@ -19,5 +19,36 @@ model User {
   updated_at DateTime?
   deleted_at DateTime?
   
+  projects Project[]
+
   @@index([email])
 }
+
+model Project {
+  id String @id @default(uuid())
+  title String
+  link String
+  description String
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  projectTags ProjectTag[]
+  created_at DateTime @default(now())
+  updated_at DateTime?
+}
+
+model Tag {
+  id String @id @default(uuid())
+  name String @unique
+  projectTags ProjectTag[]
+}
+
+model ProjectTag {
+  projectId String
+  tagId String
+  project Project @relation(fields: [projectId], references: [id])
+  tag Tag @relation(fields: [tagId], references: [id])
+
+  @@id([projectId, tagId])
+}
+
+
