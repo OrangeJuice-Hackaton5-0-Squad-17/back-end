@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/external/database/prisma/prisma.service';
-import { ProjectRepository } from 'src/app/repositories/project/project-repository';
-import { Project } from 'src/app/entities/project/project';
+import { PrismaService } from '@external/database/prisma/prisma.service';
+import { Project } from '@app/entities/project/Project';
+import { ProjectRepository } from '@app/repositories/project/project-repository';
 
 interface DeleteProjectRequest {
   id: string;

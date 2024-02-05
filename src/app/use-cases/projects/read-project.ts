@@ -1,6 +1,6 @@
+import { Project } from "@app/entities/project/Project";
+import { ProjectRepository } from "@app/repositories/project/project-repository";
 import { Injectable } from "@nestjs/common";
-import { ProjectRepository } from "src/app/repositories/project/project-repository";
-import { Project } from "src/app/entities/project/project";
 
 export interface ReadProjectsRequest {
   id: string;

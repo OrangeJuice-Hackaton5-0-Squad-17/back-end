@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { ProjectRepository } from "src/app/repositories/project/project-repository";
-import { Project } from "src/app/entities/project/project";
-import { TagRepository } from "src/app/repositories/tag/tag-repository";
-import { ProjectTagRepository } from "src/app/repositories/projectTag/projectTag-repository";
+import { ProjectRepository } from "@app/repositories/project/project-repository";
+import { TagRepository } from "@app/repositories/tag/tag-repository";
+import { ProjectTagRepository } from "@app/repositories/projectTag/projectTag-repository";
+import { Project } from "@app/entities/project/Project";
 
 export interface UpdateProjectRequest {
     id: string;
