@@ -9,6 +9,7 @@ import { UserService } from '@app/use-cases/user/user.service';
 import { IsPublic } from '@app/auth/decorators/is-public.decorator';
 import { ApiTags } from '@nestjs/swagger';
 import { User } from '@app/entities/user/user';
+import { JwtService } from '@nestjs/jwt';
 
 interface GetUserByIdWithTokenRequest {
   user: User
@@ -16,7 +17,7 @@ interface GetUserByIdWithTokenRequest {
 @ApiTags('user')
 @Controller('user')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private jwt: JwtService) {}
   @IsPublic()
   @Post()
   async create(@Body() body: CreateUserBody) {
@@ -62,8 +63,10 @@ export class UserController {
   };
 
   @Get('')
-  async get(@Request() req: GetUserByIdWithTokenRequest) {
-    const id = req.user.id;
+  async get(@Request() req: any) {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = this.jwt.decode(token).sub
+    const id = decodedToken
     try {
     const { user } =  await this.userService.getById({ id });
     return { user: UserViewModel.toHTTP(user) }

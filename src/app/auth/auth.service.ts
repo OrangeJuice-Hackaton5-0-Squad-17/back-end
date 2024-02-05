@@ -12,13 +12,14 @@ import { UserToken } from "./types/user.token";
 export class AuthService {
     constructor(private userService: UserService, private jwtService: JwtService) {}
 
-     login(user: User): UserToken {
+     login(user: any): UserToken {
         const payload: UserPayload = {
-            sub: user.id,
-            name: user.name,
-            email: user.email
+            sub: user._id,
+            name: user.props.name,
+            email: user.props.email
         }
-        const generatedUserToken = this.jwtService.sign(payload)
+        console.log('tes', payload)
+        const generatedUserToken = this.jwtService.sign(payload, {secret: process.env.JWT_USER_SECRET})
         return {
             access_token: generatedUserToken
         }

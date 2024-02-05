@@ -13,6 +13,14 @@ export class PrismaUserMapper {
         };
     }
 
+    static toAuth(user: User) {
+        return {
+             id: user.id,
+             name: user.name,
+             email: user.email,
+         };
+     }
+
     static toDomain(raw: RawUser) {
         return new User({
             email: new Email(raw.email),

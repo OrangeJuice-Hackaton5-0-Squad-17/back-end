@@ -6,6 +6,7 @@ import { DeleteUserById } from '@app/use-cases/user/delete-user';
 import { GetUserByEmail } from './get-user-by-email';
 import { DatabaseModule } from '@external/database/database.module';
 import { UserService } from './user.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [DatabaseModule],
@@ -16,7 +17,8 @@ import { UserService } from './user.service';
     GetUserById,
     DeleteUserById,
     GetUserByEmail,
-    UserService
+    UserService,
+    JwtService
   ],
   exports: [
     CreateUser,
@@ -24,7 +26,8 @@ import { UserService } from './user.service';
     GetUserById,
     DeleteUserById,
     GetUserByEmail,
-    UserService
+    UserService,
+    JwtService
   ]
   
 })
