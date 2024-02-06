@@ -29,45 +29,109 @@
 ## Installation
 
 ```bash
+# install modules *Required
 $ npm install
+
+# run migrations *Required
+$ npx prisma migrate deploy
+
+# sync dataBase with Prisma ORM *Required
+$ npx prisma db push
+
+# run all seeds to have basic information at database To run some tests *Required
+$ npx prisma db seed
 ```
 
 ## Running the app
 
 ```bash
-# development
-$ npm run start
 
 # watch mode
 $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
 ```
 
-## Test
+## Run Tests
 
 ```bash
 # unit tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
 # test coverage
 $ npm run test:cov
 ```
 
-## Support
+## Swagger endpoint
+
+```bash
+# swagger
+http://localhost:3333/api
+```
+
+## Routes:
+
+## TestRoute
+
+```bash
+# GET http://localhost:3333/test (to check if backend is up and running!)
+no body required
+```
+
+## User
+
+```bash
+# POST http://localhost:3333/user (to create user)
+body:{
+  "name": "Marcos Mantovani", STRING;
+  "email": "teste@teste.com", STRING;
+  "password": "pass@sword123*" STRING;
+}
+```
+
+```bash
+# PATCH http://localhost:3333/user/:id (to update user info) access_token required
+# header: Authorization: Bearer "access_token"
+body:{
+  "name": "New Name", STRING
+  "email": "newemail@teste.com", STRING;
+  "password": "new@pass123*" STRING;
+}
+```
+
+```bash
+# GET http://localhost:3333/user/:id (to get user account information) access_token required
+# header: Authorization: Bearer "access_token"
+no body required
+```
+
+```bash
+# DELETE http://localhost:3333/user/:id (to delete user account) access_token required
+# header: Authorization: Bearer "access_token"
+no body required
+```
+
+## Autentication
+
+```bash
+# POST http://localhost:3333/login (to validate email/password and get access_token)
+body:{
+  "email": "teste@teste.com", STRING;
+  "password": "pass@sword123*" STRING;
+}
+```
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Author - [Marcos Mantovani](https://www.linkedin.com/in/mvmes2/)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+dev
