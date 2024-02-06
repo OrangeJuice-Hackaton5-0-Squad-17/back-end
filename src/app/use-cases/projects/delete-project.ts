@@ -18,7 +18,7 @@ export class DeleteProject {
   ) {}
 
   async execute(request: DeleteProjectRequest): Promise<DeleteProjectResponse> {
-    const project = await this.projectRepository.findById(request.id);
+    const project = await this.projectRepository.findAllByUserId(request.id);
 
     if (!project) {
       throw new Error('Project not found');

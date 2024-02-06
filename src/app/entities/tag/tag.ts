@@ -4,8 +4,7 @@ import { ProjectTag } from '../projectTag/projectTag';
 
 export interface TagProps {
   name: string;
-  projectTags: ProjectTag[];
-  created_at: Date;
+  created_at?: Date;
   updated_at?: Date | null;
 }
 
@@ -13,8 +12,8 @@ export class Tag {
   private _id: string;
   private props: TagProps;
 
-  constructor(props: Replace<TagProps, { created_at?: Date }>) {
-    this._id = randomUUID();
+  constructor(props: Replace<TagProps, { created_at?: Date }>, id?: string) {
+    this._id = id ?? randomUUID();
     this.props = {
       ...props,
       created_at: props.created_at ?? new Date(),
@@ -31,14 +30,6 @@ export class Tag {
 
   public get name(): string {
     return this.props.name;
-  }
-
-  public get projectTags(): ProjectTag[] {
-    return this.props.projectTags;
-  }
-
-  public set projectTags(projectTags: ProjectTag[]) {
-    this.props.projectTags = projectTags;
   }
 
   public get created_at(): Date {

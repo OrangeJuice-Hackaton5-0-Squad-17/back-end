@@ -6,6 +6,8 @@ import { TagRepository } from "@app/repositories/tag/tag-repository";
 import { PrismaProjectRepository } from "./prisma/repositories/project/prisma-project-repository";
 import { ProjectRepository } from "@app/repositories/project/project-repository";
 import { ProjectTagRepository } from "@app/repositories/projectTag/projectTag-repository";
+import { PrismaTagRepository } from "./prisma/repositories/project/prisma-tag-repository";
+import { PrismaProjectTagRepository } from "./prisma/repositories/project/prisma-projectTag-repository";
 
 
 @Module({
@@ -18,7 +20,7 @@ import { ProjectTagRepository } from "@app/repositories/projectTag/projectTag-re
     },
     {
         provide: TagRepository,
-        useClass: PrismaProjectRepository
+        useClass: PrismaTagRepository
     },
     {
         provide: ProjectRepository,
@@ -26,7 +28,7 @@ import { ProjectTagRepository } from "@app/repositories/projectTag/projectTag-re
     },
     {
         provide: ProjectTagRepository,
-        useClass: PrismaProjectRepository
+        useClass: PrismaProjectTagRepository
     },
 ],
 exports: [

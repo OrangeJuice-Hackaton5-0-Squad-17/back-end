@@ -6,6 +6,7 @@ import { UpdateProject } from "./update-project";
 import { ProjectService } from "./project.service";
 import { PrismaService } from "@external/database/prisma/prisma.service";
 import { ProjectController } from "@external/http/controllers/project/project.controller";
+import { TagRepository } from "@app/repositories/tag/tag-repository";
 
 
 @Module({
@@ -15,7 +16,8 @@ import { ProjectController } from "@external/http/controllers/project/project.co
     CreateProject,
     GetProjectById,
     UpdateProject,
-    ProjectService
+    ProjectService,
+    
   ],
   exports: [
     CreateProject,

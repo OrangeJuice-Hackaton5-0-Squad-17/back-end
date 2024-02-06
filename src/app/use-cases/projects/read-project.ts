@@ -6,7 +6,7 @@ export interface ReadProjectsRequest {
   id: string;
 }
 export interface ReadProjectsResponse {
-  projects: Project;
+  projects: Project[];
 }
 
 @Injectable()
@@ -14,7 +14,7 @@ export class GetProjectById {
   constructor(private projectRepository: ProjectRepository) {}
 
   async execute(request: ReadProjectsRequest): Promise<ReadProjectsResponse> {
-    const project = await this.projectRepository.findById(request.id);
+    const project = await this.projectRepository.findAllByUserId(request.id);
     return { projects: project };
   }
 }

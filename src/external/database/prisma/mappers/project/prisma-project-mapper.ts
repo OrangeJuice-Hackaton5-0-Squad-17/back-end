@@ -1,31 +1,36 @@
-import { Project as DomainProject } from "src/app/entities/project/project";
-import { Project as PrismaProject, Tag as PrismaTag } from "@prisma/client";
+
+import { Project } from "@app/entities/project/Project";
+import { Tag } from "@app/entities/tag/Tag";
+import { Project as RawProject, Tag as RawTag } from "@prisma/client";
 
 export class PrismaProjectMapper {
-    static toPrisma(project: DomainProject): PrismaProject {
+    static toPrisma(project: Project) {
       return {
         id: project.id,
         title: project.title,
         link: project.link,
+        img: project.img,
         description: project.description,
-        userId: project.userId,
-        created_at: new Date(),
-        updated_at: new Date(),
+        userId: project.userId
       };
     }
 
-    static toDomain(prismaProject: PrismaProject, tags: PrismaTag[]): DomainProject {
-      return new DomainProject({
-        title: prismaProject.title,
-        link: prismaProject.link,
-        description: prismaProject.description,
-        userId: prismaProject.userId,
-        user: null,
-        tags: tags.map(tag => tag.name),
-        projectTags: [], 
-        created_at: prismaProject.created_at,
-        updated_at: prismaProject.updated_at,
+    static toDomain(raw: RawProject) {
+      return new Project({
+        title: raw.title,
+        link: raw.link,
+        description: raw.description,
+        userId: raw.userId,
+        img: raw.img,
+        created_at: raw.created_at,
+        updated_at: raw.updated_at,
       });
+    }
+
+    static tagToPrisma(tag: Tag) {
+      return {
+        name: tag.name
+      }
     }
 }
 

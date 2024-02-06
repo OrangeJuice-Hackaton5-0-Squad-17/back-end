@@ -1,7 +1,8 @@
 import { Project } from "@app/entities/project/Project";
+import { Tag } from "@app/entities/tag/Tag";
 import { ProjectRepository } from "@app/repositories/project/project-repository";
 import { ProjectTagRepository } from "@app/repositories/projectTag/projectTag-repository";
-import { TagRepository, UpsertTagOptions } from "@app/repositories/tag/tag-repository";
+import { TagRepository } from "@app/repositories/tag/tag-repository";
 import { Injectable } from "@nestjs/common";
 
 
@@ -33,20 +34,20 @@ export class CreateProject {
       link,
       description,
       userId,
-      user: null,
-      tags: [],
-      projectTags: [],
-      created_at: new Date(),
-      updated_at: null,
-      img
+      img,
+      created_at: new Date()
     });
 
-    await this.projectRepository.create(project);
+   const newProject = await this.projectRepository.create(project);
 
     if (tags) {
         for (const tagName of tags) {
-            const tag = await this.tagRepository.upsert({where: {name: tagName}, update: {}, create: {name: tagName}} as UpsertTagOptions);
-            await this.projectTagRepository.create(project.id, tag.id);
+          const newTag = new Tag({
+            name: tagName
+          })
+           const tag = await this.tagRepository.createTag(newTag);
+
+            await this.projectTagRepository.create(newProject.CreatedProject.id, tag.createdTag.id)
         }
     }
 

@@ -1,16 +1,10 @@
 import { Tag } from "src/app/entities/tag/Tag";
 
-export interface UpsertTagOptions {
-  where: { name: string };
-  update: {};
-  create: { name: string };
-}
 
 export abstract class TagRepository {
-  abstract upsert(options: UpsertTagOptions): Promise<Tag>;
+  abstract createTag(tag: Tag): Promise<any>;
   abstract findUnique(name: string): Promise<Tag>;
   abstract findById(id: string): Promise<Tag | null>;
-  abstract create(name: string): Promise<Tag>;
 }
 
 

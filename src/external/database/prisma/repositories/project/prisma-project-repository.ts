@@ -2,6 +2,7 @@ import { ProjectRepository } from "@app/repositories/project/project-repository"
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../../prisma.service";
 import { Project } from "@app/entities/project/project";
+import { PrismaProjectMapper } from "../../mappers/project/prisma-project-mapper";
 
 
 @Injectable()
@@ -9,42 +10,53 @@ export class PrismaProjectRepository implements ProjectRepository {
   constructor(
     private prisma: PrismaService,
   ) {}
+  async findAllByUserId(userId: string): Promise<any> {
+   const projects = await this.prisma.project.findMany({ where: { userId } });
+
+   console.log('como vem projetos? ', projects)
+   const userProjects = [];
+
+  for (let x in projects) {
+    console.log('x', x)
+    console.log( 'project ', projects)
+
+    const tags = await this.prisma.projectTag.findMany({ where: { projectId: projects[x].id } });
+
+    const tagsArr = [];
+    
+    for (let z in tags) {
+      const foundTag = await this.prisma.tag.findFirst({ where: { id: tags[z].tagId } });
+      tagsArr.push(foundTag.name)
+    }
+    const tempProject = {
+          ...projects[x],
+          tags: tagsArr
+        }
+        userProjects.push(tempProject)
+  }
+
+   return {
+    userProjects
+   }
+
+  }
   delete(id: string): Promise<void> {
     throw new Error("Method not implemented.");
   }
 
-  async create(project: Project): Promise<void> {
-    const projectData = await this.prisma.project.create({
-      data: {
-        title: project.title,
-        link: project.link,
-        description: project.description,
-        userId: project.userId,
-      },
-    });
+  async create(project: Project): Promise<any> {
 
-    if (project.tags) {
-      for (const tagName of project.tags) {
-        const tag = await this.prisma.tag.upsert({
-          where: { name: tagName },
-          update: {},
-          create: { name: tagName }
-        });
-        const newProjectTag = { 
-          projectId: projectData.id,
-          tagId: tag.id,
+    const RawProjectData = PrismaProjectMapper.toPrisma(project)
 
-         }
-        await this.prisma.projectTag.create({ data: newProjectTag });
-      }
+    const createdProject = await this.prisma.project.create({ data: RawProjectData });
+
+    return {
+      CreatedProject: createdProject
     }
-    return;
+    
   }
 
   async update(project: Project): Promise<void> {
     
-  }
-  async findById(id: string): Promise<Project | null> {
-    return null;
   }
 }
